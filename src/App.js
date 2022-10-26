@@ -1,21 +1,27 @@
+import React from "react";
 import "./App.css";
 
 import SendbirdApp from "@sendbird/uikit-react/App";
 import "@sendbird/uikit-react/dist/index.css";
 
-// function notifyUser(notificationText = "Thank you for enabling notification") {
-//   if(!("Notification" in window)) {
-//     alert("Browser does not support notifications");
-//   } else if (Notification.permission === "granted"){
-//     const notification = new Notification(notificationText);
-//   } else if (Notification.permission === "denied") {
-//     Notification.requestPermission().then(permission) => {
-//       if (permission === "granted"){
-//         const notification = new Notification(notificationText);
-//       }
-//     }
-//   }
-// }
+function showNotification() {
+  if ("****" in window) {
+    alert();
+  }
+  const notification = new Notification("Bad word detected", {
+    body: "No nasty words here!",
+  });
+}
+console.log(Notification.permission);
+if (Notification.permission === "granted") {
+  showNotification();
+} else if (Notification.permission !== "denied") {
+  Notification.requestPermission().then((permission) => {
+    if (permission === "granted") {
+      showNotification();
+    }
+  });
+}
 
 function App() {
   return (
